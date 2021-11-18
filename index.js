@@ -6,7 +6,7 @@ const userRouter = require('./routes/userRourter');
 const { notFound, errorHandler } = require('./middleware/errMiddleware');
 const noteRouter = require("./routes/noteRouter");
 const PORT = process.env.PORT || 5000;
-const path = require("path");
+
 
 const app = express()
 dotenv.config();
@@ -26,18 +26,19 @@ app.get('/', (req, res) => {
 // })
 
 // --------------------------deployment------------------------------
-const _dirname = path.resolve();
+// const _dirname = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(_dirname, "/client/build")));
+    app.use(express.static('/client/build'));
+    const path = require("path");
 
     app.get("*", (req, res) =>
-        res.sendFile(path.resolve(_dirname, "client", "build", "index.html"))
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     );
-} else {
-    app.get("/", (req, res) => {
-        res.send("API is running..");
-    });
+    // } else {
+    //     app.get("/", (req, res) => {
+    //         res.send("API is running..");
+    //     });
 }
 // --------------------------deployment------------------------------
 app.use("/api/users", userRouter)
