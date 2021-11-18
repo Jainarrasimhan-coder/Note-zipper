@@ -13,9 +13,9 @@ dotenv.config();
 connectDB();
 app.use(express.json())
 
-app.get('/', (req, res) => {
-    res.send("hello daaai  world")
-})
+// app.get('/', (req, res) => {
+//     res.send("hello daaai  world")
+// })
 
 // app.get('/api/notes', (req, res) => {
 //     res.json(notes)
